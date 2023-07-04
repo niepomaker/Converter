@@ -5,7 +5,7 @@ from datetime import date
 import datetime
 from datetime import datetime as xd
 
-# os.system("wget --certificate=/usr/share/n6/roman.osinski-dzp.pl.pem --private-key=/usr/share/n6/roman.osinski.n6.key https://n6beta.cert.pl/report/threats.json -P /home/lukasz/Converter/Converter")
+os.system("wget ... -P /home/lukasz/Converter/Converter")
 
 connection = psycopg2.connect(user="postgres", password="JeBJh4tELW9nq4Ohk9VA", host="localhost",
                               port="5432", database="roman")
@@ -92,17 +92,6 @@ def newEmptyDictionary(data):
 file_json = open('threats.json')
 data = json.load(file_json)
 
-# for i in data:
-#     counter = 0
-#     dataId = readIdFromBase()
-#     if i['id'] not in dataId:
-#         if 'address' in i:
-#             while(len(i['address']) > counter):
-#                 saveToBaseWithAddress(i, newEmptyDictionary(data), counter)
-#                 counter += 1
-#         else:
-#             saveToBaseWithoutAddress(i, newEmptyDictionary(data))
-
 print("JSON został dodany do bazy danych oraz zostały utworzone pliki .txt")
 
 counter = 0
@@ -126,12 +115,11 @@ for i in data:
     weekAgo = xd.strptime(today1, '%Y-%m-%d')
     if currentDay >= weekAgo:
         counter += 1
-        # saveToFile(i)
 
 print(counter)
 print(counter1)
 file_json.close()
-# os.remove("/home/lukasz/Converter/Converter/threats.json")
+os.remove("/home/lukasz/Converter/Converter/threats.json")
 if connection:
     cursor.close()
     connection.close()
